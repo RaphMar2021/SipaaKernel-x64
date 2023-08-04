@@ -5,15 +5,17 @@ SipaaOS, with a new homemade base.
 * Architecture :
   * x86_64 :
       * Basic IDT
-      * PIC (not used currently)
-      * GDT
+      * PIC
+      * GDT & TSS
   * Input / Output
 * Devices :
-  * PS2 :
-    * Mouse (not working)
   * Serial
+* Libraries
+  * Standard Library (libc)
+  * Logging library (liblogging)
+  * Console library (libconsole)
+  * String Management Library (libstr) (empty)
 * Graphics
-* Memory Manager (not sure if it's working)
-* Standard Library (broken)
-* System library (small, but working) 
+   * Single Buffering
+   * Double Buffering
       
