@@ -4,7 +4,7 @@ CC = gcc
 LD = ld
 
 CFLAGS :=                  \
-    -Wextra \
+    -w \
     -Dlimine \
     -std=gnu11 \
     -ffreestanding \
@@ -39,12 +39,14 @@ LD_FLAGS :=                 \
 	$(CC) $(CFLAGS) -c $< -o $@
 
 kernel.elf: $(OBJS)
-	nasm kernel/src/architecture/x86_64/gdt.asm -felf64 -o gdt.o
+	nasm kernel/src/arch/x86_64/gdt.asm -felf64 -o gdt.o
 	$(LD) $(LD_FLAGS) $(OBJS) gdt.o -o $@
+
+iso:
 	rm -rf iso_root
 	mkdir -p iso_root
 	cp kernel.elf \
-		limine.cfg limine/limine.sys limine/limine-cd.bin limine/limine-cd-efi.bin iso_root/
+		limine.cfg wallpaper.bmp limine/limine.sys limine/limine-cd.bin limine/limine-cd-efi.bin iso_root/
 	xorriso -as mkisofs -b limine-cd.bin \
 		-no-emul-boot -boot-load-size 4 -boot-info-table \
 		--efi-boot limine-cd-efi.bin \
@@ -60,4 +62,9 @@ clean:
 	rm sipaaos.iso
 
 run:
+	make iso
 	qemu-system-x86_64 -m 4g -enable-kvm -serial stdio -cdrom ./sipaaos.iso
+
+debug:
+	make iso
+	qemu-system-x86_64 -m 4g -enable-kvm -serial stdio -cdrom ./sipaaos.iso -s -S
