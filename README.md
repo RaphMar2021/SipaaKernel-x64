@@ -1,5 +1,5 @@
-# SipaaOS
-SipaaOS, with a new homemade base.
+# SipaaKernel
+What's behind your favorite open-source OS
 
 ## Features
 * Architecture :
