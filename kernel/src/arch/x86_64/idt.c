@@ -30,8 +30,8 @@ void irq0_handler() {
 }
 
 void irq1_handler() {
-    pic_end_master();
     log(LOG_DEBUG, "Keyboard IRQ has been raised!\n");
+    pic_end_master();
 
 } 
 
